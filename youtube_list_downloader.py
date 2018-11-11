@@ -37,14 +37,19 @@ def separate(line):
 		except:
 			print('file line is not formatted correctly:' + line)
 
+def download_this_list(list):
+	#takes a list of titles and urls or just urls
+	#downloads all videos and extracts mp3's
+
+	for x in content:
+		title, url = separate(x)
+		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+		    ydl.download([url]) 
+
 #grabbing the file... (which should consist of titles + the video url or just the urls of each video, one url per line
 with open(fname) as f:
 	content = f.readlines()
 
 content = [x.strip() for x in content] 
 
-#video download loop
-for x in content:
-	title, url = separate(x)
-	with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-	    ydl.download([url]) 
+download_this_list(content)
